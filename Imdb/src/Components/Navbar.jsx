@@ -12,6 +12,7 @@ function Navbar() {
     </Link>
     <Link to="/">Movies</Link>
     <Link to="/Watchlist">WatchList</Link>
+    <div>hello</div>
     </>
 )   
 }

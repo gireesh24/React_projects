@@ -5,6 +5,7 @@ import Navbar from "../../Imdb Clone/src/Components/Navbar"
 import Home from "./Pages/Home"
 import WatchList from "./Components/WatchList"
 
+
 function ImdbApp() {
   return (
     <>
