@@ -1,8 +1,12 @@
 // import React from 'react'
 
+import Banner from "./Banner"
+
 function ImdbHome() {
   return (
-    <div>ImdbHome</div>
+    <div>
+   <Banner />
+   </div>
   )
 }
 
