@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="doubleHolder">
+        <button class="double">double me</button>
+    </div>
+    <script>
+        document.querySelector('#doubleHolder').addEventListener('click',function(e){
+         if(e.target.classList.contains('double'));
+         {
+            let btn1=document.createElement('button')
+            btn1.setAttribute('class','triple')
+            btn1.innerHTML='double me';
+
+            let btn2=document.createElement('button');
+            btn2.setAttribute('class','triple');
+            btn2.innerHTML='double me';
+
+            e.currentTarget.appendChild(btn1)
+            // e.currentTarget.appendChild(btn2)
+            // e.currentTarget.removeChild(e.target);
+         }
+        });
+    </script>
+</body>
+</html>

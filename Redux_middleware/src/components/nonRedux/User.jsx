@@ -12,7 +12,7 @@ function User() {
                 setLoading(true)
                 const resp =await fetch("https://jsonplaceholder.typicode.com/users/10")
                 const user=await resp.json();
-                console.log(resp)
+                console.log(user)
                 setUser(user)
             }
         catch(err){

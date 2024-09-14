@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wether">
+        <div class="temp">20</div>
+        <div class="time_location">
+            <p>Location</p>
+            <span>Random Time and Date</span>
+        </div>
+        <div class="weather_condition">
+            <p><img src="" alt=""></p>
+            <span>condition</span>
+        </div>
+    </div>
+    </div>
+    <nav>
+        <form>
+            <input type="text" placeholder="search_location" class="searchfield">
+            <button type="submit">search</button>
+        </form>
+    </nav>
+    <script>
+let target="pune";
+const temperatureField = document.querySelector(".temp");
+const cityField = document.querySelector(".time_location p");
+const dateField = document.querySelector(".time_location span");
+const emojiField = document.querySelector(".weather_condition img");
+const weatherField = document.querySelector(".weather_condition span");
+const searchField = document.querySelector(".searchField");
+const form = document.querySelector("form");
+
+async function fetchData(target){
+    try{
+         let url = `https://api.weatherapi.com/v1/current.json?key=35af7ff606db422880d141328231305&q=${target}&aqi=no`;
+         const response=await fetch(url)
+         const data=await response.json()
+         
+         form.addEventListener('submit', search)
+         function search(e){
+            e.preventDefault()
+            target=searchField.value
+            fetchData(target)
+         }
+         console.log(data)
+         let currentTemp=data.current.temp_c;
+         let currentCondition=data.current.condition.text;
+         let currentLocation=data.location.name;
+         let locationTime=data.location.localtime;
+         let emoji=data.current.condition.icon;
+         console.log(currentTemp,currentCondition,currentLocation,locationTime,emoji)
+
+updateDom(currentTemp,currentLocation,locationTime,emoji,currentCondition)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+function updateDom(temp, locationName,time,emoji,condition){
+    console.log(time)
+    const exactTime=time.split(" ")[1]
+    const exactDate=time.split(' ')[0]
+    const exactDay=getDayFullName( new Date(exactDate).getDay())
+    // const exactDay=getDayFullName(8);
+    console.log(exactDay)
+
+    temperatureField.innerText=temp;
+    cityField.innerText=locationName;
+    dateField.innerText=`${exactTime} ${exactDay} ${exactDate}`;
+    emojiField.src=emoji;
+    weatherField.innerText=condition;
+
+}
+
+function getDayFullName(num){
+switch (num){
+    case 0: 
+    return "sunday";
+    case 1:
+        return "monday";
+        case 2:
+            return "tuesday";
+        case 3: 
+        return "wednesday";
+        case 4: 
+        return "tuesday";
+        case 5 :
+        return "friday";
+        case 6: 
+        return "saturday";
+        default:
+            return "dont know";
+}
+}
+
+fetchData(target)
+ </script>
+</body>
+</html>

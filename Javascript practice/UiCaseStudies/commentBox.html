@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Nested Comments Example</title>
+  <style>
+    .comment {
+  margin: 10px;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
+
+.reply-btn,
+.collapse-btn {
+  margin-right: 10px;
+}
+
+.all-comment:not(:first-child) {
+  margin-left: 4rem;
+}
+
+  </style>
+</head>
+<body>
+  <div id="comments">
+    <div class="comment">
+      <p>User A: This is a great post!</p>
+      <button class="reply-btn">Reply</button>
+      <button class="collapse-btn">Collapse</button>
+      <div class="replies">
+        <div class="comment">
+          <p>User B: I agree!</p>
+          <button class="reply-btn">Reply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const commentContainer=document.getElementById('comments');
+    commentContainer.addEventListener('click', (e)=>{
+        const clickedElement=e.target;
+        if(clickedElement.classList.contains('reply-btn')){
+            const comment=clickedElement.closest('.comment');
+            // creating new HTML body to reply section
+            const replyBox=document.createElement('div');
+            replyBox.className='comment-reply';
+            replyBox.innerHTML=`<p><input type='text' placeholder='your reply..'></p>
+            <button class='submit-btn'>submit </button>`;
+            comment.querySelector('.replies').appendChild(replyBox);
+        }
+        if(clickedElement.classList.contains('collapse-btn')){
+            const comment=clickedElement.closest('.comment');
+            const replies=comment.querySelector('.replies');
+            replies.style.display=replies.style.display==='none'? 'block':'none';
+        }
+    });
+
+    commentContainer.addEventListener('click', (e)=>{
+        const clickedElement=e.target;
+        // if(clickedElement.classList.contains('submit-btn')){
+        //    const replyInput=clickedElement.closest('.comment.reply').querySelector('input'); 
+        //    const replyText=replyInput.value;
+        //    const newReply=document.createElement('div');
+        //    newReply.className='comment';
+        //    newReply.innerHTML=`<p>User: ${replyText}</p>`;
+        //    clickedElement.closest('.comment.reply').appendChild(newReply);
+        //    replyInput.value='';
+        // }
+        if (clickedElement.classList.contains('submit-btn')) {
+    const replyInput = clickedElement.closest('.comment-reply').querySelector('input');
+    const replyText = replyInput.value;
+    const newReply = document.createElement('div');
+    newReply.className = 'comment';
+    newReply.innerHTML = `<p>User: ${replyText}</p>`;
+    clickedElement.closest('.comment.reply').appendChild(newReply);
+    replyInput.value = '';
+  }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function placeholder(drink){
+            return new Promise(function(resolve, reject){
+                if(drink==='tea'){
+                    resolve('order has placed')
+                }else{
+                    reject('wrong order placed')
+                }
+            })
+        }
+        placeholder('coffe').then(function(orderStatus){
+            console.log(orderStatus)
+        }).catch(function(err){
+            console.log(err)
+        })
+        
+    </script>
+</body>
+</html>

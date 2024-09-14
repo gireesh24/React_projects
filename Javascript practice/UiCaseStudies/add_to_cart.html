@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="categories">
+        <div class="category" id="headphones">
+          <h2>Headphones</h2>
+          <div class="product">Product A</div>
+          <div class="product">Product B</div>
+        </div>
+        <div class="category" id="laptops">
+          <h2>Laptops</h2>
+          <div class="product">Product X</div>
+          <div class="product">Product Y</div>
+        </div>
+        <div class="category" id="mobiles">
+          <h2>Mobiles</h2>
+          <div class="product">Product P</div>
+          <div class="product">Product Q</div>
+        </div>
+      </div>
+      <div id="colorPalette">
+        <div class="color-box" style="background-color: red;">1</div>
+        <div class="color-box" style="background-color: green;">2</div>
+        <div class="color-box" style="background-color: blue;">3</div>
+      </div>
+      <script>
+
+        const categoriesContainer=document.getElementById('categories')
+        categoriesContainer.addEventListener('click',(e)=>{
+            const clickElement=e.target;
+            console.log(clickElement);
+            if(clickElement.classList.contains('product')){
+                const category=clickElement.closest('.category').querySelector('h2').textContent;
+                console.log(category);
+                const product=clickElement.textContent;
+                console.log(product);
+                console.log(`cliked on ${product} in the ${category}`)
+            }
+        })
+
+        const colorPalette = document.getElementById('colorPalette');
+
+colorPalette.addEventListener('click', (event) => {
+  const clickedElement = event.target;
+  
+  // Check if the clicked element is a color box
+    if(clickedElement.classList.contains('color-box')){
+        const color=clickedElement.style.backgroundcolor;
+        document.body.style.backgroundColor=color;
+    }
+})
+      </script>
+</body>
+</html>

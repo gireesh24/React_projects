@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // genereate bill with async promise
+        function placeOrder(drink){
+            return new Promise(function(resolve, reject){
+                if(drink==='tea'){
+                    resolve('order places successfully')
+                }else{
+                    reject('order not able to place')
+                }
+            })
+        }
+
+        function processOrder(orderPlaced){
+            return new Promise(function(resolve){
+                resolve(`${orderPlaced} and served.`)
+            })
+        }
+
+        function generateBill(processOrder){
+            return  new Promise(function(resolve){
+                resolve(`${processOrder} and bill genrated with 200rs`)
+            })
+        }
+
+        placeOrder('cofee').then(function(orderStatus){
+            console.log(orderStatus)
+            return orderStatus
+        }).then(function(orderStatus){
+            let orderIsProcssed=processOrder(orderStatus)
+            console.log(orderIsProcssed)
+            return orderIsProcssed
+        }).then(function(orderIsProcssed){
+            let billgenerate=generateBill(orderIsProcssed)
+            return billgenerate
+        }).then(function(bill){
+            console.log(bill)
+        }).catch(function(err){
+            console.log(err)
+        })
+    
+
+        // optimze above solution
+        async function servedorder(){
+            try{
+            let orderStatus= await placeOrder('milk')
+            console.log(orderStatus)
+            let orderIsProcssed= await processOrder(orderStatus)
+            console.log(orderIsProcssed)
+            let billgenerate=await generateBill(orderIsProcssed)
+            console.log(billgenerate)
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+
+        servedorder();
+    </script>
+</body>
+</html> 

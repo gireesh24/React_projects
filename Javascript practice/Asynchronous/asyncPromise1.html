@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function placeOrder(drink){
+            return new Promise(function(resolve, rej){
+                if(drink==='tea'){
+                    resolve('order tea placed')
+                }
+                else{
+                    rej('order cant place')
+                }
+            })
+        }
+
+        function processOrder(orderPlaced) {
+    return new Promise(function(resolve) {
+        resolve(`${orderPlaced} and Served.`)
+    })
+     }
+
+        placeOrder('tea').then(function(orderStatus){
+            console.log(orderStatus)
+            return orderStatus
+        }).then(function(orderStatus){
+            let orderIsProcssed=processOrder(orderStatus)
+            console.log(orderIsProcssed)
+        })
+        // .then(function(orderIsProcssed){
+        //     console.log(orderIsProcssed)
+        // })
+    </script>
+</body>
+</html>

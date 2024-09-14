@@ -1,0 +1,29 @@
+/* create css variables  */
+:root{
+    --ligthBackground: #F9F5EB;
+    --background:#E4DCCF;
+    --red:#EA5455;
+    --blue:#002B5B;
+    --green:#245953;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+}
+
+/* ************toolbox_cont **********/
+.toolbox-cont{
+    height: 5rem;
+    background-color: var(--blue);
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Banner({url , name}) {
+function Banner({ url , name }) {
   return (
     <div className='backgroundImage h-[20vh] md:h-[55vh] bg-center flex items-end' 
     style={

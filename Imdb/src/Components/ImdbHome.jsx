@@ -8,6 +8,7 @@ function ImdbHome() {
    <Banner />
    </div>
   )
+
 }
 
 export default ImdbHome

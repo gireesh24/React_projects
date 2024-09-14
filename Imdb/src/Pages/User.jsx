@@ -66,7 +66,7 @@ function User() {
 	}
 
   return (
-		<>
+		<>  
 			{/* Optional Chaining -> If The object is undefined, then do not attempt to access the property, rather return undefined */}
 			<div>User Name: {user?.name?.firstname}</div>
 			<div>User Phone: {user?.phone}</div>

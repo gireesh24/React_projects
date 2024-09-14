@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root">   </div>
+<script type="text/babel"> // this script will convert to javascript by using bable
+    const ele=document.getElementById("root")
+
+    function App1(){
+        return <h4> hello this is app1</h4>
+    }
+    ReactDOM.render(<App1 />,ele)
+    function App(props){ // we can pass multiple props using one word
+        return <h1 >{props.test}</h1>
+    }
+    ReactDOM.render(<App text="test" test="hello props in app"/>,ele)
+
+    function App2({text}){ // we can pass props directly
+        return <h2>{text}</h2>
+    }
+    ReactDOM.render(<App2 text="hello app2"/>, ele)
+
+    ReactDOM.render(<App1 />,ele)
+
+</script>
+</body>
+</html>

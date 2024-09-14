@@ -12,7 +12,7 @@ return async (dispatch)=>{
 dispatch(userActions.setLoading())
         const resp= await fetch(`https://jsonplaceholder.typicode.com/users/${param}`);
         if(resp.status === 404){
-            return dispatch(userActions.setNotFound())
+            return dispatch(userActions.notFound())
         }
         const user=await resp.json()
         dispatch(userActions.setUser(user))

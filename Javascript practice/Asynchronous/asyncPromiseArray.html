@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      const p1=Promise.resolve('p1');
+      // it returns p1
+      const p2=3.14;
+        const p3=new Promise ((resolve,reject)=>{
+         resolve("maths")
+            reject('error hadling')
+        })
+        let return_promise=Promise.all([p1,p2,p3])
+        return_promise.then((array)=>{
+            console.log(array)
+        }).catch(function(err){
+            console.log(err)
+        })
+
+        
+    </script>
+</body>
+</html>

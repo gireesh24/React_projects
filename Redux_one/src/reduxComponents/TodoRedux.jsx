@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 // import store from "../redux/store"
 import todoSlice from "../redux/TodoSlice"
 
-    const todoActions=todoSlice.actions
+    const todoActions=todoSlice.actions  // todoslice reducer functions storing to constarnt
 
 function TodoRedux() {
     const todoslice=useSelector((store)=>store.todo)

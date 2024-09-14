@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getEmailFn(subjects) {
+  return `${subjects} (${this.firstName}.${this.lastName}@gmail.com)`;
+}
+
+function chooseSubject(sub1, sub2) {
+  return `${sub1} and ${sub2}`;
+}
+
+function chooseBatches(batch1, batch2, batch3) {
+  return [batch1, batch2, batch3];
+}
+
+let teacher1 = {
+  firstName: 'Steve',
+  lastName: 'Rogers',
+  age: 35,
+  getEmail: getEmailFn
+};
+
+let teacher2 = {
+  firstName: 'Tony',
+  lastName: 'Stark',
+  age: 40,
+  getEmail: getEmailFn
+};
+let subject=chooseSubject('maths','computers')
+let batches = chooseBatches('BatchA', 'BatchB', 'BatchC');
+
+console.log("Retrieving teacher1's email:");
+console.log(teacher1.getEmail.apply(teacher1, batches));
+
+console.log("\nRetrieving teacher2's email:");
+console.log(teacher2.getEmail.call(teacher2, subject));
+    </script>
+</body>
+</html>

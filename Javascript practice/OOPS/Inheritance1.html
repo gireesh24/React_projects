@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("hello")
+class person{
+    constructor(name,age){
+        this.name=name,
+        this.age=age
+    }
+    great(){
+        console.log("this is person class there values is age:", this.name )
+    }
+}
+
+class student extends person{
+    constructor(name,age,grade){
+        super(name,age),
+        this.grade=grade
+    }
+    study(){
+        console.log("this is student extend class", this.name, this.age,this.grade)
+    }
+}
+
+
+const user1=new person("raju", 23)
+const user2=new student("sathnu",22,"4th")
+user1.great();
+user2.study();
+user2.great();
+
+//---------------------------
+// prototype
+// constructor
+function car(name,color){
+    this.name=name,
+    this.color=color
+}
+
+car.prototype.drive=function(){
+    // console.log("this is car prototype function",this.name,this.color)
+    const res=[this.name,this.color]
+    return ("this is car prototype function",res)
+}
+
+const car1=new car("tata","green")
+const car2=new car("audi","red")
+car1.drive();
+const print2=car2.drive();
+console.log(car1.drive());
+console.log(print2)
+
+    </script>
+</body>
+</html>

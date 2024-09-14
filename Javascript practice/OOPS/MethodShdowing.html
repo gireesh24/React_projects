@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+// Constructor function for Car
+function Car(name, color) {
+  this.name = name;
+  this.color = color;
+}
+
+// Adding a shared method to the Car constructor's prototype
+Car.prototype.drive = function() {
+  console.log(`${this.name} is driving. in petrol car`);
+};
+
+// child constructor function for exlectric
+function ElectricCar(name,color,batteryType){
+  Car.call(this, name, color),
+  this.batteryType=batteryType
+  console.log(this.name,this.color,this.batteryType)
+  
+}
+ElectricCar("tata","gray","lithium")
+
+// inherit from car prototype
+ElectricCar.prototype=Object.create(Car.prototype)
+
+// adding a method to specific function
+ElectricCar.prototype.charge=function(){
+    console.log(this.name, "this is charging")
+}
+const elecar=new ElectricCar("ola","white","lithium ion")
+elecar.drive()
+console.log(elecar)
+
+ElectricCar.prototype.drive=function(){
+    console.log("this is electric car drive fun",this.name,this.color)
+}
+const car1=new Car("tata","blue petrol")
+const car2=new ElectricCar("tesla", "gray electric")
+car1.drive();
+car2.drive();
+    </script>
+</body>
+</html>

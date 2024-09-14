@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root"> hello  </div>
+    <script type="text/babel">
+        const ele=document.getElementById("root")
+        function Counter({defaultValue}){
+            // create react hook (use state)
+            const [count, setcount]=React.useState(defaultValue)
+            // const increaseCount=()=>{
+            //     setcount(count+1) // chnaging count with useState
+            // }
+            const decreaseCount=()=>{
+                setcount(count-1)
+            }
+            
+            return <div>
+                    <button onClick={()=>{setcount(count+1)}}>+</button>
+                    <p>count = {count}</p>
+                    <button onClick={decreaseCount}>-</button>
+                </div>
+        }
+
+        function ParentComponent(){
+            return <div>
+                    <Counter defaultValue={10}/>
+                    <Counter defaultValue={15}/>
+                    <Counter defaultValue={20}/>
+                </div>
+        }
+        ReactDOM.render(<ParentComponent />,ele)
+    </script>
+</body>
+</html>

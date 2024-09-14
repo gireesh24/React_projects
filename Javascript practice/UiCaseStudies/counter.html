@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="counter">
+        <button class="btn" id="decrement">-</button>
+        <span class="count" id="count">0</span>
+        <button class="btn" id="increment">+</button>
+        <button class="btn" id="reset">reset</button>
+    </div>
+    <script>
+const decrementbtn=document.getElementById('decrement');
+const incrementbtn=document.getElementById('increment');
+const countdisplay=document.getElementById('count');
+const resetbtn=document.getElementById('reset');
+let count=0;
+decrementbtn.addEventListener('click',function(){
+   if(count>0){
+    count--;
+    countdisplay.textContent=count;
+   } 
+})
+incrementbtn.addEventListener('click',function(){
+   if(count>-1){
+    count++;
+    countdisplay.textContent=count;
+   } 
+})
+resetbtn.addEventListener('click',()=>{
+    count=0;
+    countdisplay.textContent=count;
+})
+    </script>
+</body>
+</html>

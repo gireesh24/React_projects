@@ -4,7 +4,7 @@ const todoSlice=createSlice({
     name:"todo",
     initialState:{
         currentTodovalue:null,
-        todoList:[]
+        todoList:['todo1' , 'todo2']
     },
     reducers:{
         changetodovalue:(state, {payload})=>{
