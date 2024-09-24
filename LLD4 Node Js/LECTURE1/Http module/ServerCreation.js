@@ -24,3 +24,4 @@ server.listen(2000,"localhost",()=>{
 })
 
 // to http module run comand in vs node filename
+// to start nodemon project install nodemon to project and run file in terminal like nodemon filename

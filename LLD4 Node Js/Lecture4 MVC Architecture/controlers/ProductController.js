@@ -78,14 +78,18 @@ const deleteProduct= async (req,res)=>{
         category: body.category,
         isInStock: body.isInStock,
         password: body.password,
-      });
+        confimPassword:body.confimPassword
+      }); 
+      // auto save
       console.log("product crearted", product);
       return res
         .status(201)
         .json({ message: "Product created successfully", product: product });
     } catch (err) {
         console.log("failed to create a product")
-      return res.status(500).json({ message: err.message });
+      return res.status(500).json({ message:" post call catch block caaled" ,
+        error: err.message
+       });
     }
   };
 

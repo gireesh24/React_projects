@@ -1,14 +1,30 @@
 import React from 'react'
-import {Button, Input, Form} from 'antd'
+import {Button, Input, Form, message} from 'antd'
 import {Link} from 'react-router-dom'
+import {RegisterUser} from "../../api/user"
 function Register() {
+    const onFinish=async(values)=>{
+        try{
+            const response=await RegisterUser(values)
+            if(response.success){
+message.success(response.message)
+            }
+            else{
+                //
+message.error(response.message)
+            }
+        }catch(err){
+            console.log("onfinsh function", err)
+            message.error("somthing went wrong")
+        }
+    }
   return (
     // <div> welcome to Login page</div>
     <>
     <main className="App-header">
-        <h1> login to book MY SHOW</h1>
+        <h1> create account to book MY SHOW</h1>
         <section className='mw-500 text-center px-3'>
-            <Form layout='vertical'>
+            <Form layout='vertical' onFinish={onFinish}>
             <Form.Item label="Email" htmlFor='email' name='email' className='d-block'
             rules={[{ required:true, message:"email required"},
                 {type : 'email', message:'please enter valied email' }

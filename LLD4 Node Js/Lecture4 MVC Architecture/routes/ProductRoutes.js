@@ -17,7 +17,7 @@ productRouter.get("/",getAllProducts); //  /api/products
 productRouter.get("/:id", getProductById);
 
 //update products by id
-productRouter.put("/id",productUpdateById)
+productRouter.put("/:id",productUpdateById)
 
 // update product attribute by id
 productRouter.patch("/:id",productUpdateForPatch)
