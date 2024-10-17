@@ -3,6 +3,7 @@ const user=require('../models/userModules')
 const jwt=require("jsonwebtoken")
 const auth=require("../middleware/authMiddleware")
 const userRouter=express.Router();
+
 userRouter.post("/", async (req,res)=>{
     try{
         const userExisit=await user.findOne({email:req.body.email})
@@ -41,6 +42,7 @@ res.send({
 console.log("user registaion failed",err)
 }
 })
+
 // login route
 userRouter.post("/login", async (req,res)=>{
     try{
@@ -53,14 +55,14 @@ if(!userexists)
     })
 }
 
-// if(req.body.password !== user.password){
-//     return res.send({
-//         success:false,
-//         message:"invalid password"
-//     })
-//  }
+if(req.body.password !== userexists.password){
+    return res.send({
+        success:false,
+        message:"invalid password"
+    })
+ }
 // jwt token creation
-const token=jwt.sign({userId:user._id}, process.env.Jwt_Scret,{expiresIn:"30s"});
+const token=jwt.sign({userId:userexists._id}, process.env.Jwt_Scret,{expiresIn:"1d"});
 console.log("jwt token in login route", token)
 
  res.send({
@@ -99,7 +101,9 @@ userRouter.get("/get-current-user", auth,  async (req,res)=>{
    {
     //  console.log(req.url, req.method)
     // console.log("token : ",req.headers("authorization"))
+    console.log(req.body,"get current user api body")
     const userdata=await user.findById(req.body.userId)
+    
     console.log("get current user in server blcok user data:", userdata)
     res.send({success:true, message:"user authenticated", data:userdata})
     }

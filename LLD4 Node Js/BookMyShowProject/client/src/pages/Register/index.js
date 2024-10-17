@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Input, Form, message} from 'antd'
+import {Button, Input, Form, message, Radio} from 'antd'
 import {Link} from 'react-router-dom'
 import {RegisterUser} from "../../api/user"
 function Register() {
@@ -60,6 +60,21 @@ message.error(response.message)
              placeholder='enter password'
              >
             </Input>
+            </Form.Item>
+            <Form.Item className='d-block text-center'
+            label="Register as a partner"
+            name= "role"
+            htmlForm="role"
+            initialValue={false}
+            rules={[{required:true, message:"please select role option"}]}
+            >
+                <div className='d-flec justify-contect-start'>
+                    <Radio.Group name='radiogroup' className='flex-start'>
+                        <Radio value={"partner"}>yes</Radio>
+                        <Radio value={"user"}>No</Radio>
+                    </Radio.Group>
+                </div>
+
             </Form.Item>
             <Form.Item className='d-block text-center'>
                 <Button type='primary'

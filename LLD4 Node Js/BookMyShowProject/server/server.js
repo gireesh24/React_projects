@@ -9,8 +9,12 @@ require('dotenv').config(); // load env varibles into process.env
 
 const connectDB=require('./config/Db')
 const userRouter=require("./routes/userRoutes")
+const movieRouter=require("./routes/movieRoutes")
+const theatreRouter=require("./routes/theatreRoutes")
 app.use(express.json());
 app.use("/api/users/", userRouter)
+app.use("/api/movies",movieRouter)
+app.use("/app/theatres",theatreRouter)
 
 
 connectDB();

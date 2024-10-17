@@ -22,21 +22,25 @@ function ProtectedRoute({children}) {
       icon:<UserOutlined/>,
       children:[
         {
-          lable:(<span 
-          onClick={()=>{
-            if(user.role==="admin"){
-              navigate("/admin")
-            }else if(user.role==="partner"){
-              navigate("/partner")
-            }else{
-              navigate("/profile");
-            }
-          }}
-          >my profile</span>),
+          lable:(
+            <span
+              onClick={() => {
+                if (user.role === "admin") {
+                  navigate("/admin");
+                } else if (user.role === "partner") {
+                  navigate("/partner");
+                } else {
+                  navigate("/profile");
+                }
+              }}
+            >
+              My Profile
+            </span>
+          ),
           icon:<ProfileOutlined/>
         },
         {
-          lable:<Link to="/login"
+          lable:<Link to="/logout"
           onClick={()=>{
             localStorage.removeItem("token")
           }}
@@ -51,11 +55,11 @@ useEffect(()=>{
   const getValidUser=async()=>{
     try{
       console.log("try block in getValidUser")
-      Dispatch(ShowLoading);
+      Dispatch(ShowLoading());
       const responce= await GetCurrentUser();
       console.log(responce)
       Dispatch(SetUser(responce.data))
-      Dispatch(HideLoading);
+      Dispatch(HideLoading());
 
     }catch(err){
       console.log("protected route get valid user failed",err)
@@ -91,7 +95,7 @@ return (
   </Header>
   <div style={{
     padding:24,
-    minHeight:"380", background:"#fff"
+    minHeight:"380", background:"#fff" , color:"white"
   }}>
     {children}
   </div>

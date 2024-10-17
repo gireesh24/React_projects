@@ -1,5 +1,5 @@
 import axios from "axios"
-const token=localStorage.getItem("token");
+// const token=localStorage.getItem("token");
 
 export const axiosInstance=axios.create({
     headers:{
@@ -7,6 +7,7 @@ export const axiosInstance=axios.create({
         // Authorization: token ? `Bearer ${token}` : "",
     },
 })
+
 // add arequest interceptors
 
 axiosInstance.interceptors.request.use(

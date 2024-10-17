@@ -7,6 +7,10 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import {Provider} from "react-redux"
 import store from './redux/store';
 import ProtectedRoute from './components/ProtectedRoute';
+import Admin from './pages/Admin';
+import Partner from './pages/Partner';
+import Profile from './pages/Profile';
+
 
 
 function App() {
@@ -24,6 +28,10 @@ function App() {
           />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+      <Route path="/partner" element={<ProtectedRoute><Partner /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+
      </Routes>
      </BrowserRouter>
      </Provider>
