@@ -2,7 +2,9 @@ import React from 'react'
 
 function profile() {
   return (
-    <div>profile</div>
+    <div>   
+       <h3 style={{color:`black`}}>Profile Page</h3>
+</div>
   )
 }
 

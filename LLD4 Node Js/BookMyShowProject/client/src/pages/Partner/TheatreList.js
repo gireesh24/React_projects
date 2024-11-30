@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import TheatreFormModal from './TheatreFormModal';
-import DeleteMovieModel from '../Admin/DeleteMovieModel';
+import DeleteTheatreModal from '../Partner/DeleteTheatreModal';
 import {Table, Button,message} from "antd";
 import {EditOutlined, DeleteOutlined} from "@ant-design/icons";
 import {getAllTheatres} from "../../api/theatre"
@@ -98,6 +98,8 @@ const colums=[
         >
             Add Theatres
         </Button>
+        <h3>Theatrelist</h3>
+
         <Table dataSource={theatres} columns={colums}></Table>
         {isModalOpen && (<TheatreFormModal 
             isModalOpen={isModalOpen}
@@ -105,6 +107,14 @@ const colums=[
             selectedTheatres={selectedTheatres}
             formType={formType}
             getData={getData}
+        />)}
+        {isDeleteModalOpen && (
+            <DeleteTheatreModal
+            isDeleteModalOpen={isDeleteModalOpen}
+            setIsDeleteModalOpen={setIsDeleteModalOpen}
+            selectedTheatres={selectedTheatres}
+            getData={getData}
+          
         />)}
     </div>
   )

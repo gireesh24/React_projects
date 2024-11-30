@@ -8,7 +8,8 @@ const newTheatre= new Theatre(req.body);
 await newTheatre.save();
 res.send({
     success:true,
-    message:"new theater created successfully"
+    message:"new theater created successfully",
+    data:newTheatre
 })
     }
     catch(err){
@@ -25,7 +26,8 @@ route.put("/update-theatre", async (req,res)=>{
         if(!theatre){
             return res.status(404).send({
                 success:false,
-                message:"theatre not found"
+                message:"theatre not found",
+                data:theatre
             })
         }
         else{

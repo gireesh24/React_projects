@@ -1,6 +1,7 @@
 import React from 'react'
 import {Tabs} from "antd";
-import TheatreList from "./TheatreList";
+import TheatreList from "./theatreList";
+// import { Color } from 'antd/es/color-picker';
 function index() {
   const items=[
     {
@@ -11,7 +12,7 @@ function index() {
   ]
   return (
     <div>
-    <h1>Partner Page</h1>
+    <h1 style={{color:`black`}}>Partner Page</h1>
     <Tabs items={items}/>
     </div>
   )
