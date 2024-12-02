@@ -1,15 +1,33 @@
 import React from 'react'
-import {Form, Button, Input} from 'antd';
-import { Link } from 'react-router-dom';
-// import Register from '../Register';
-
+import {Form, Button, Input, message} from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
+import { LoginUser } from '../../api/users';
 function Login() {
+
+    const Navigate=useNavigate();
+    const onfinsh= async (values)=>{
+        try{
+            const response= await LoginUser(values)
+            if(response.success){
+                message.success(response.message); 
+                // localStorage.setItem("Token",response.data)
+                Navigate("/");
+            }
+            else{
+                message.success(response.message); 
+            }
+        }
+        catch(err){
+            console.log(err)
+            message.success(err.message); 
+        }
+    }
   return (
     <div>
         <main className='App-header'>
         <h1>Login to Book My Show</h1>
         <section className='mw-500 text-center px-3'>
-            <Form layout="vertical">
+            <Form layout="vertical" onFinish={onfinsh}>
     <Form.Item
      label="Email"
      htmlFor='email'

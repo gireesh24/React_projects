@@ -3,7 +3,13 @@ const userSchema= new mongooes.Schema({
     name:{type:String, required:true},
     email:{type:String, required:true},
     password:{type:String, required:true},
-    isAdmin:{type:Boolean, required:true, default:false}
+    isAdmin:{type:Boolean, required:true, default:false},
+    role:{
+        type:String,
+        enum:["user","admin","partner"],
+        required:true,
+        default:"user"
+    }
 })
 
 const UserModel= mongooes.model("NovUsers",userSchema);
