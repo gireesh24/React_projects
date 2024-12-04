@@ -2,9 +2,9 @@
 const jwt=require("jsonwebtoken") 
 const express= require("express")
 // const app=express();
-const cookies=require("cookie-parser")
+const cookie=require("cookie-parser")
 const users=require("../models/userModel");
-const { now } = require("mongoose");
+// const { now } = require("mongoose");
 
 const userRouter=express.Router();
 
@@ -72,7 +72,8 @@ const token =jwt.sign({userId: users._id},
     {expiresIn:"1d"})
 
 console.log("JWT Token",token)
-// res.cookies('token', token,{expires: new Date(Date.now()+960000)} )
+// res.cookies("token", token,{expires: new Date(Date.now()+960000),httpOnly: true} )
+res.cookie("token", token, { expires: new Date(Date.now() + 960000), httpOnly: true });
 res.send({
     success:true,
     message:"login sucessfully",

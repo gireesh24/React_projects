@@ -12,9 +12,11 @@ function Login() {
                 message.success(response.message); 
                 // localStorage.setItem("Token",response.data)
                 Navigate("/");
+                console.login("successfuly logined in")
             }
             else{
                 message.success(response.message); 
+                console.login("login file onfinsh failed")
             }
         }
         catch(err){
