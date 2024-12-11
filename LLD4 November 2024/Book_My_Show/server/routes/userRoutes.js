@@ -5,8 +5,9 @@ const express= require("express")
 const cookie=require("cookie-parser")
 const users=require("../models/userModel");
 // const { now } = require("mongoose");
-
+const authMiddleware=require("../middlewares/authmiddlewares")
 const userRouter=express.Router();
+
 
 userRouter.post("/register", async (req,res)=>{
     try{
@@ -67,13 +68,12 @@ if(req.body.password!==userExits.password){
         message:"password doesntmacth"
     })
 }
-const token =jwt.sign({userId: users._id},
+const token =jwt.sign({userId: userExits._id},
     process.env.JST_SECRET,
     {expiresIn:"1d"})
 
 console.log("JWT Token",token)
-// res.cookies("token", token,{expires: new Date(Date.now()+960000),httpOnly: true} )
-res.cookie("token", token, { expires: new Date(Date.now() + 960000), httpOnly: true });
+// res.cookie("token", token, { expires: new Date(Date.now() + 86400000), httpOnly: true });
 res.send({
     success:true,
     message:"login sucessfully",
@@ -83,6 +83,21 @@ res.send({
     catch(err){
 return res.status(500).send(err)
     }
+})
+
+userRouter.get("/get-current-user", authMiddleware, async (req,res)=>{
+    try{
+    const user=await users.findById(req.body.user).select("-password");
+    console.log("get current user route form serverside try block")
+     res.send({
+        success:true,
+        data:user,
+        message:"your are authenticated"
+     })
+    }catch(err){
+        res.status(404).send("get current user api failed in server side")
+    }
+
 })
 
 // userRouter.get("/allusers", async (req,res)=>{

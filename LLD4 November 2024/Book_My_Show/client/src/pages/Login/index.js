@@ -10,13 +10,13 @@ function Login() {
             const response= await LoginUser(values)
             if(response.success){
                 message.success(response.message); 
-                // localStorage.setItem("Token",response.data)
+                localStorage.setItem("token",response.data)
                 Navigate("/");
-                console.login("successfuly logined in")
+                console.log("successfuly logined in")
             }
             else{
                 message.success(response.message); 
-                console.login("login file onfinsh failed")
+                console.log("login file onfinsh failed")
             }
         }
         catch(err){

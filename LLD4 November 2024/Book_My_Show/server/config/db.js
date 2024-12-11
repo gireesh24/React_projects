@@ -3,7 +3,7 @@ const dbUrl=process.env.DB_URL;
 
 const ConnectDb= async()=>{
     try{
-        await mongooes.connect(dbUrl)
+        await mongooes.connect(dbUrl);
         console.log("connected Db")
     }
     catch(err){
