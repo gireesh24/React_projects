@@ -3,12 +3,14 @@ const app=express();
 require("dotenv").config(); // load env varibles
 
 const userRoutes=require("./routes/userRoutes");
+const movieRoutes=require("./routes/movieRoutes");
 const connectDB=require("./config/db");
 console.log("server", process.env.DB_URL);
 connectDB();
 app.use(express.json());
 
 app.use("/api/users",userRoutes);
+app.use("/api/movies", movieRoutes)
 app.listen(9092,()=>{
     console.log("9092 sever started")
 })

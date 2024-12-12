@@ -1,4 +1,4 @@
-import React, {useEffect}from 'react'
+import React, {Children, useEffect}from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import {useNavigate, Link} from "react-router-dom"
 import {
@@ -21,6 +21,7 @@ function ProtectedRoute({childern}) {
 
   const {Header} = Layout;
   console.log("protected route")
+
   const gatValidUser=async()=>{
     try{
       dispatch(ShowLoading()); // make my loading state true
@@ -36,14 +37,13 @@ function ProtectedRoute({childern}) {
       dispatch(HideLoading());
       dispatch(SetUser(null));
     }
-  }
-
+  };
 
 const navIteams=[
   {label:"Home", icon:<HomeOutlined />},
   {label: `${user? user.name :"guest"}`,
    icon:<UserOutlined/>, 
-   childern:
+   children:
    [
     { 
       label: (<span onClick={()=>{
@@ -64,26 +64,24 @@ const navIteams=[
     icon:<ProfileOutlined/>
     },
 
-    {label:(<span onClick={()=>{
+    {label:(
       <Link to='/login' onClick={()=>{
         localStorage.removeItem("token");
       }}
-      />
-    }}>
+     >
     logout
-    </span>
-  ),
+  </Link>
+    ),
   icon:<LogoutOutlined />},
   ]},
-
 ]
-useEffect(()=>{
-  if(localStorage.getItem('token')){
+useEffect(() => {
+  if (localStorage.getItem('token')) {
     gatValidUser();
-  }else{
+  } else {
     navigate("/login");
   }
-})
+}, []);
 
   return ( 
     user &&(
