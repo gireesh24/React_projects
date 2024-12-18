@@ -1,13 +1,13 @@
 import { Modal, message } from "antd";
-import { deleteMovie } from "../../api/movies";
+import { deleteTheatre } from "../../api/theatres";
 import { ShowLoading, HideLoading } from "../../redux/loaderSlice";
 import { useDispatch } from "react-redux";
 
-const DeleteMovieModal = ({
+const DeleteTheatreModal = ({
   isDeleteModalOpen,
   setIsDeleteModalOpen,
-  selectedMovie,
-  setSelectedMovie,
+  selectedTheatre,
+  setSelectedTheatre,
   getData,
 }) => {
   const dispatch = useDispatch();
@@ -15,15 +15,15 @@ const DeleteMovieModal = ({
   const handleOk = async () => {
     try {
       dispatch(ShowLoading());
-      const movieId = selectedMovie._id;
-      const response = await deleteMovie({ movieId });
+      const theatreId = selectedTheatre._id;
+      const response = await deleteTheatre({ theatreId });
       if (response.success) {
         message.success(response.message);
         getData();
       } else {
         message.error(response.message);
       }
-      setSelectedMovie(null);
+      setSelectedTheatre(null);
       setIsDeleteModalOpen(false);
       dispatch(HideLoading());
     } catch (err) {
@@ -35,18 +35,18 @@ const DeleteMovieModal = ({
 
   const handleCancel = () => {
     setIsDeleteModalOpen(false);
-    setSelectedMovie(null);
+    setSelectedTheatre(null);
   };
 
   return (
-    <Modal
-      title="Delete Movie?"
+    <Modal centered
+      title="Delete Theatre?"
       open={isDeleteModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <p style={{fontWeight:"bold", fontSize:'30px', color:"green"}}>Movie Name :-{selectedMovie.title}</p>
-      <p className="pt-3 fs-18">Are you sure you want to delete this movie?</p>
+      <p style={{fontWeight:"bold", fontSize:'30px', color:"green"}}>Movie Name :-{selectedTheatre.title}</p>
+      <p className="pt-3 fs-18">Are you sure you want to delete this Theatre?</p>
       <p className="pb-3 fs-18">
         This action can't be undone and you'll lose this movie data.
       </p>
@@ -54,4 +54,14 @@ const DeleteMovieModal = ({
   );
 };
 
-export default DeleteMovieModal;
+export default DeleteTheatreModal;
+
+// import React from 'react'
+
+// function DeleteTheatreModal() {
+//   return (
+//     <div>DeleteTheatreModal</div>
+//   )
+// }
+
+// export default DeleteTheatreModal

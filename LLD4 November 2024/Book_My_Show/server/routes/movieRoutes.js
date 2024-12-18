@@ -9,10 +9,10 @@ const {addMovie,
 // add movies
 movieRoute.post("/add-movie", addMovie)
 // get all movies
-movieRoute.post("/get-all-movie", getAllMovies)
+movieRoute.get("/get-all-movie", getAllMovies)
 // upadate a movie
 movieRoute.post("/update-movie", updateMovie)
 // deleate a movie
-movieRoute.post("/delete-movie", deleteMovie)
+movieRoute.delete("/delete-movie/:movie_id", deleteMovie)
 
 module.exports=movieRoute;

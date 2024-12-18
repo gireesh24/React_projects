@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form,Button,Input, message } from 'antd';
+import { Form,Button,Input, message, Radio } from 'antd';
 import { Link } from 'react-router-dom';
 import { RegisterUser } from '../../api/users';
 
@@ -66,9 +66,24 @@ else{
         Rigister
     </Button>
 </Form.Item>
+<Form.Item className='d-block text-center'
+label="register as a partner" 
+htmlFor='role' 
+name="role" 
+initialValue={false}
+rules={[{required:true, message:"please select an option"}]}>
+
+<div className='d-flex justify-content-start'>
+<Radio.Group name="radioGroup" className='flex-start'>
+    <Radio value={"partner"}>Yes</Radio>
+    <Radio value={"user"}>No</Radio>
+</Radio.Group>
+</div>
+</Form.Item>
 <p>
     {" "}
     Already a user ? <Link to="/login">Login</Link></p>
+
         </Form>
     </section>
     </main>

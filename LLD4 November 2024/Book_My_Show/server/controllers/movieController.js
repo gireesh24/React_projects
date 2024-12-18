@@ -20,9 +20,12 @@ const addMovie=  async (req,res)=>{
 const getAllMovies= async(req,res)=>{
     try{
         const allmovies= await movies.find();
+        // if(!allmovies.length){
+        //     return res.status(400).send("there is no record found in DB")
+        // }
         res.send({
-            success:false,
-            message:err.message,
+            success:true,
+            message:"movies fecthed",
             data:allmovies 
         });
     }catch(err){
@@ -65,7 +68,8 @@ const updateMovie=async (req,res)=>{
 
 const deleteMovie=async (req,res)=>{
     try{
-    const deletedMovie= await movies.findByIdAndDelete(req.body.movie_id, req.body);
+    const deletedMovie= await movies.findByIdAndDelete(req.params.movie_id);
+    console.log(deleteMovie,req.params.movie_id)
     if(!deletedMovie){
         res.status(404).send({
             success:false,

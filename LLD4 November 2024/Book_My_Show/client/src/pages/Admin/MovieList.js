@@ -4,7 +4,9 @@ import React, {useEffect, useState } from 'react';
 import MovieForm from './movieForm';
 import DeleteMovieModal from './deleteMovieModal';
 import { ShowLoading,HideLoading } from '../../redux/loaderSlice';
+import { SetUser } from '../../redux/userSlice';
 import { getAllMovies } from '../../api/movies';
+import { GetCurrentUser } from '../../api/users';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment"
 
@@ -33,7 +35,7 @@ function MovieList() {
     ];
     
     const [isModalOpen, setIsmodalOpen]=useState(false);
-    const [movies, setMovies]=useState(FakeMovies);
+    const [movies, setMovies]=useState([]);
     const [formType, setFormType]= useState("add")
     const [selectedMovie, setSelectedMovie]=useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen]= useState(false);
@@ -53,16 +55,17 @@ function MovieList() {
         {title:"Description", dataIndex: "description"},
         {title:"Duration", 
         dataIndex: "duration",
-        render:(text)=>` $(text)mins`
+        render:(text)=>`${text}mins`
         },
         {title:"Genre", dataIndex: "genre"},
         {title:"Lanuage", dataIndex: "language"},
-        {title:"Relase Date", dataIndex: "releaseDate",
+        {title:"Relase Date", dataIndex: "releasedate",
             render:(text,data)=>{
-                return moment(data.releaseDate).format("DD-MM-YYYY");
+                return moment(data.releasedate).format("DD-MM-YYYY");
             }
         },
-        {title: "Action", render:(text,data)=>{
+        {title: "Action", 
+            render:(text,data)=>{
             return (
                 <div>
                     <Button onClick={()=>{
@@ -81,8 +84,14 @@ function MovieList() {
 
     const getData= async()=>{
         dispatch(ShowLoading());
+              const userresponse=await GetCurrentUser();
+        
+              // console.log("protected route failed",response);
+              dispatch(SetUser(userresponse.data));
         const response= await getAllMovies();
+        // console.log(response)
         const allMovies=response.data;
+    // console.log(allMovies)
         setMovies(allMovies.map(function (item){
             return {...item, key:`movie${item._id}`};
              })
@@ -97,7 +106,7 @@ function MovieList() {
     <div className='d-flex justify-content-end'>
         <Button onClick={()=>{
             setIsmodalOpen(true);
-            setFormType("edit");
+            setFormType("add");
         }}>Add Movie</Button>
     </div>
 

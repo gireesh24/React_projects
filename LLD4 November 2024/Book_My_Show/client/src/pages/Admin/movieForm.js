@@ -16,19 +16,23 @@ const MovieForm = ({
   const dispatch = useDispatch();
 
   if (selectedMovie) {
-    selectedMovie.releaseDate = moment(selectedMovie.releaseDate).format(
-      "YYYY-MM-DD"
-    );
+    // console.log(selectedMovie.releasedate)
+    selectedMovie.releaseDate = moment(selectedMovie.releasedate).format(
+      "DD-MM-YYYY"
+      );
+      console.log(`${moment(selectedMovie.releasedate).format(
+        "DD-MM-YYYY")}`)
   }
 
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
       let response = null;
+      console.log(response, formType, values)
       if (formType === "add") {
         response = await addMovies(values);
       } else {
-        response = await updatedMovie({ ...values, movieId: selectedMovie._id });
+        response = await updatedMovie({ ...values, movie_id: selectedMovie._id });
       }
       if (response.success) {
         getData();
@@ -116,7 +120,7 @@ const MovieForm = ({
               <Col span={8}>
                 <Form.Item
                   label="Release Date"
-                  name="releaseDate"
+                  name="releasedate"
                   rules={[
                     {
                       required: true,

@@ -29,6 +29,7 @@ function ProtectedRoute({childern}) {
 
       // console.log("protected route failed",response);
       dispatch(SetUser(response.data));
+      console.log("redox user staus",response.data)
       dispatch(HideLoading());
     }catch(err){
       console.log("protected rout catch block",err);

@@ -10,5 +10,5 @@ const moviesSchema= new mongooes.Schema({
 
 })
 
-const movies=mongooes.model("Movies", moviesSchema);
+const movies=mongooes.model("NovMovies", moviesSchema);
 module.exports=movies

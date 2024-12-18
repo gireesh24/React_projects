@@ -100,19 +100,20 @@ userRouter.get("/get-current-user", authMiddleware, async (req,res)=>{
 
 })
 
-// userRouter.get("/allusers", async (req,res)=>{
-//     try{
-//         const allusers=await users.find()
-//         res.send(200).send(allusers)
-//         // json({
-//         //     data:allusers
-//         // })
-//     }
-//     catch(err){
-//         console.log("get all users router failes")
-//         res.send(500).json({
-//             message:"get all users route failed"
-//         })
-//     }
-// })
+userRouter.get("/allusers", async (req,res)=>{
+    try{
+        const allusers=await users.find()
+        res.status(200).
+        json({
+            data:allusers,
+            message:"hello"
+        })
+    }
+    catch(err){
+        console.log("get all users router failes")
+        res.send(500).json({
+            message:"get all users route failed"
+        })
+    }
+})
 module.exports=userRouter
