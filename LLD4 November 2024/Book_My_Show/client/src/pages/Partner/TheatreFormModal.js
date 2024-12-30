@@ -17,18 +17,23 @@ const TheatreFormModal = ({
   
   const onFinish = async (values) => {
     try {
+      console.log("onfinsh values", values);
+
       dispatch(ShowLoading());
       let response = null;
-      console.log(response, formType, values)
       if (formType === "add") {
         response = await addTheatre({...values, owner:user._id});
       } else {
-        values.theatre_id=selectedTheatre._id;
+
+        values._id=selectedTheatre._id;
         response = await updateTheatre(values);
       }
+      console.log("form type", formType,"values", values, response.success)
+
       if (response.success) {
         getData();
         message.success(response.message);
+        console.log("theatre saved successfully")
         setIsModalOpen(false);
       } else {
         message.error(response.message);

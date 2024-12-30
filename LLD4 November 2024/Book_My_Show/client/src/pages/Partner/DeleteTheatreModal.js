@@ -16,7 +16,10 @@ const DeleteTheatreModal = ({
     try {
       dispatch(ShowLoading());
       const theatreId = selectedTheatre._id;
+      // console.log("deleted theatre id:---",theatreId);
+      // console.log(selectedTheatre);
       const response = await deleteTheatre({ theatreId });
+      console.log("delete theatre api response",response)
       if (response.success) {
         message.success(response.message);
         getData();
@@ -45,7 +48,7 @@ const DeleteTheatreModal = ({
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <p style={{fontWeight:"bold", fontSize:'30px', color:"green"}}>Movie Name :-{selectedTheatre.title}</p>
+      <p style={{fontWeight:"bold", fontSize:'30px', color:"green"}}>Movie Name :-{selectedTheatre.name}</p>
       <p className="pt-3 fs-18">Are you sure you want to delete this Theatre?</p>
       <p className="pb-3 fs-18">
         This action can't be undone and you'll lose this movie data.

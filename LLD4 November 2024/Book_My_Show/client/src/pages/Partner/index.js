@@ -6,6 +6,7 @@ function Partner() {
     const tabIteams=[
         {key:"1", label:"Theatres", children:< TheaterList />}
     ]
+    console.log("partner page called")
   return (
    <div>
    <h1>Partner page</h1>

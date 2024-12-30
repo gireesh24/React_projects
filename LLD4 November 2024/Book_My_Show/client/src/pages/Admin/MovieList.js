@@ -92,7 +92,7 @@ function MovieList() {
         // console.log(response)
         const allMovies=response.data;
     // console.log(allMovies)
-        setMovies(allMovies.map(function (item){
+        setMovies(allMovies.map(function (item){ 
             return {...item, key:`movie${item._id}`};
              })
          );

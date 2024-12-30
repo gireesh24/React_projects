@@ -1,4 +1,6 @@
-import React, {Children, useEffect}from 'react'
+import React, { useEffect}from 'react'
+// import styled from 'styled-components';
+
 import { useSelector,useDispatch } from 'react-redux'
 import {useNavigate, Link} from "react-router-dom"
 import {
@@ -14,7 +16,7 @@ import { ShowLoading,HideLoading } from '../redux/loaderSlice';
 
 
 
-function ProtectedRoute({childern}) {
+function ProtectedRoute({children}) {
   const {user}=useSelector((state)=>state.users);
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -41,7 +43,9 @@ function ProtectedRoute({childern}) {
   };
 
 const navIteams=[
-  {label:"Home", icon:<HomeOutlined />},
+  {label:"Home", icon:<HomeOutlined />, onClick:()=>{
+    navigate('/')
+  }},
   {label: `${user? user.name :"guest"}`,
    icon:<UserOutlined/>, 
    children:
@@ -84,6 +88,7 @@ useEffect(() => {
   }
 }, []);
 
+
   return ( 
     user &&(
       <>
@@ -99,10 +104,9 @@ useEffect(() => {
       >
 <h3 className='text-white m-0' style={{color:'white'}}>Book My SHow</h3>
 <Menu theme='dark' mode='horizontal' items={navIteams}/>
-
       </Header>
 <div style={{padding:24, minHeight:380, background:"#fff"}}>
-  {childern} Book my showraju </div>
+  {children} </div>
       </Layout>
       </>
     )

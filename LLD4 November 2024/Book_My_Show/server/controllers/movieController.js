@@ -26,7 +26,7 @@ const getAllMovies= async(req,res)=>{
         res.send({
             success:true,
             message:"movies fecthed",
-            data:allmovies 
+            data:allmovies
         });
     }catch(err){
         console.log("get all movies routes failed in server side",err)

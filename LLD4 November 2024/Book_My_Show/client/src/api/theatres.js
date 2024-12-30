@@ -10,7 +10,7 @@ export const addTheatre= async(payload)=>{
 
 export const getAllTheatresFromAdmin= async(payload)=>{
     try{
-        const response= await axiosInstance.get("/api/theatres/add-theatres",payload);
+        const response= await axiosInstance.get("/api/theatres/get-all-theatres",payload);
         return response.data
     }catch(err){
         console.log(err)
@@ -19,10 +19,10 @@ export const getAllTheatresFromAdmin= async(payload)=>{
 
 export const getAllTheatres= async(ownerId)=>{
     try{
-        const response= await axiosInstance.get(`/api/theatres/get-all-theatres/${ownerId}`);
+        const response= await axiosInstance.get(`/api/theatres/get-all-theatres-by-owner/${ownerId}`);
         return response.data
     }catch(err){
-        console.log(err)
+        console.log("getall thetares API call catch block",err)
     }
 }
 
@@ -37,7 +37,8 @@ export const updateTheatre= async(payload)=>{
 
 export const deleteTheatre= async(payload)=>{
     try{
-        const response= await axiosInstance.delete(`/api/theatres/delete-theatre:${payload}`);
+        console.log("delete theatre API payload", payload)
+        const response= await axiosInstance.delete(`/api/theatres/delete-theatres/${payload.theatreId}`);
         return response.data
     }catch(err){
         console.log(err)

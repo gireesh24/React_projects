@@ -18,7 +18,7 @@ const theaterSchema=new mongooes.Schema({
     },
     owner:{
         type:mongooes.Schema.Types.ObjectId,
-        ref:"NovUser"
+        ref:"NovUsers"
     },
     isActive:{
         type:Boolean,

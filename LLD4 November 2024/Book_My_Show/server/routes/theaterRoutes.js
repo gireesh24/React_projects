@@ -7,7 +7,7 @@ theatreRoute.post("/add-theatres", async (req,res)=>{
 const newtheatre= new Theatre(req.body);
 await newtheatre.save();
 res.send({
-    sucess:true,
+    success:true,
     message:"theatre saved successfully",
     data:newtheatre
 })
@@ -23,15 +23,12 @@ res.send({
 
 theatreRoute.post("/update-theatres", async (req,res)=>{
     try{
-
-        
-const theatreUpadated= await Theatre.findByIdAndUpdate(req.body.theatreId, req.body, {new:true})
-
-res.send({
-    sucess:true,
-    message:"theatre saved successfully",
-    data:theatreUpadated
-})
+    const theatreUpadated= await Theatre.findByIdAndUpdate(req.body._id, req.body, {new:true})
+        res.send({
+        success:true,
+        message:"theatre saved successfully",
+        data:theatreUpadated
+        })
     }
     catch(err){
         return res.status(500).json({
@@ -51,8 +48,8 @@ if(!theatreDeleted){
     })
 }
 res.send({
-    sucess:true,
-    message:"theatre saved successfully",
+    success:true,
+    message:"theatre deleted successfully",
 
 })
     }
@@ -69,7 +66,7 @@ theatreRoute.get("/get-all-theatres", async (req,res)=>{
     try{
 const allTheatre= await Theatre.find().populate("owner")
 res.send({
-    sucess:true,
+    success:true,
     message:"theatre saved successfully",
     data:allTheatre
 })
@@ -82,11 +79,11 @@ res.send({
 })
 
 // get a theatre from specfic owner
-theatreRoute.get("/get-all-theatre-by-owner/:ownerId", async (req,res)=>{
+theatreRoute.get("/get-all-theatres-by-owner/:ownerId", async (req,res)=>{
     try{
 const allTheatre= await Theatre.find({owner:req.params.ownerId})
 res.send({
-    sucess:true,
+    success:true,
     message:"theatre saved successfully",
     data:allTheatre
 })
