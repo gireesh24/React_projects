@@ -19,9 +19,9 @@ export const updateShows=async(payload)=>{
         console.log("update shows api failed", err.message);
     }
 }
-export const deleteShows= async(values)=>{
+export const deleteShows= async(payload)=>{
     try{
-        const response= await axiosInstance.delete("/api/shows/delete-shows",values);
+        const response= await axiosInstance.delete(`/api/shows/delete-shows/${payload.id}`);
         console.log("delete shows api called successfully")
         return response.data
     }catch(err){
@@ -29,9 +29,9 @@ export const deleteShows= async(values)=>{
     }
 }
 
-export const getAllShowsByTheatre= async(values)=>{
+export const getAllShowsByTheatre= async(payload)=>{
     try{
-        const response= await axiosInstance.get("/api/shows/get-all-shows-by-theatre",values);
+        const response= await axiosInstance.get(`/api/shows/get-all-shows-by-theatre/${payload.id}`);
         console.log("getAllshowsByTheatre api called successfully")
         return response.data
     }catch(err){
@@ -39,9 +39,9 @@ export const getAllShowsByTheatre= async(values)=>{
     }
 }
 
-export const getAllShowsByMovie= async(values)=>{
+export const getAllTheatresByMovie= async({movie, date})=>{
     try{
-        const response= await axiosInstance.get("/api/shows/get-All-theatres-by-movie",values);
+        const response= await axiosInstance.get(`/api/shows/get-All-theatres-by-movie/${movie}/${date}`);
         console.log("getAllShowsBymovie api called successfully")
         return response.data
     }catch(err){
@@ -50,13 +50,12 @@ export const getAllShowsByMovie= async(values)=>{
 }
 
 
-export const getAllShowsById= async(values)=>{
+export const getAllShowsById= async(payload)=>{
     try{
-        const response= await axiosInstance.get("/api/shows/get-shows-by-id",values);
-        console.log("getAllShowsById api called successfully")
+        const response= await axiosInstance.get(`/api/shows/get-shows-by-id/${payload.showId}`);
+        console.log("getAllShowsById api called successfully", response.data)
         return response.data
     }catch(err){
         console.log("getAllShowsById shows api failed", err.message);
     }
 }
-

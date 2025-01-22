@@ -10,6 +10,7 @@ const auth=(req,res,next)=>{
         next();
     }catch(err){
         console.log("auth middleware called in catch block")
+        // localStorage.removeItem("token");
 return res
 .status(401)
 .send({success:false, message:"unauthorized user"})

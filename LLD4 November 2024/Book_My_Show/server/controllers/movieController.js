@@ -79,12 +79,11 @@ const deleteMovie=async (req,res)=>{
     console.log("update movie route in server side", deletedMovie)
         res.status(200).send({
             success:true,
-            message:"movie addedd successfully",
-
+            message:"movie addedd successfully"
         })
     }
     catch(err){
-        console.log("update movies routes failed in server side",err)
+        console.log("delete movies routes failed in server side",err)
         res.send({
             success:false,
             message:err.message
@@ -92,9 +91,52 @@ const deleteMovie=async (req,res)=>{
     }
 }
 
+const getMovieById= async(req,res)=>{
+    try{
+            const movie=await movies.findById(req.params.movie_id)
+            if(!movie){
+                return res.status(404).send({
+                    success:false,
+                    message:"movie not found in db"
+                });
+            }
+            res.send({
+                success:true,
+                message:"movie fetched successfully",
+                data:movie
+            })
+    }
+    catch(err){
+        console.log("get movie by id routes failed in server side",err)
+        res.send({
+            success:false,
+            message:err.message
+        });  
+    }
+}
+
+    // const getMovieById = async (req, res) => {
+    //     const movie = await movies.findById(req.params.movie_id);
+      
+    //     if (!movie) {
+    //       return res.status(404).send({
+    //         success: false,
+    //         message: "Movie not found in DB",
+    //       });
+    //     }
+      
+    //     res.send({
+    //       success: true,
+    //       message: "Movie fetched successfully",
+    //       data: movie,
+    //     });
+    //   };
+
+
 module.exports={
     addMovie,
     getAllMovies,
     updateMovie,
-    deleteMovie
+    deleteMovie,
+    getMovieById
 }

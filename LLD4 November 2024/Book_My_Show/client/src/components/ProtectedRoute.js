@@ -35,7 +35,8 @@ function ProtectedRoute({children}) {
       dispatch(HideLoading());
     }catch(err){
       console.log("protected rout catch block",err);
-
+      localStorage.removeItem("token")
+      navigate("/login")
       message.error("please login again")
       dispatch(HideLoading());
       dispatch(SetUser(null));

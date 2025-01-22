@@ -3,7 +3,8 @@ const movieRoute= require("express").Router();
 const {addMovie,
     deleteMovie,
     updateMovie,
-    getAllMovies
+    getAllMovies,
+    getMovieById
 } =require("../controllers/movieController");
 
 // add movies
@@ -14,5 +15,8 @@ movieRoute.get("/get-all-movie", getAllMovies)
 movieRoute.post("/update-movie", updateMovie)
 // deleate a movie
 movieRoute.delete("/delete-movie/:movie_id", deleteMovie)
+
+// get movie by id
+movieRoute.get("/movie/:movie_id", getMovieById)
 
 module.exports=movieRoute;

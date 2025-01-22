@@ -26,8 +26,9 @@ const showSchema= new mongooes.Schema({
         required:true
     },
     bookedSeats:{
-        type:Number,
-        required:true
+        type:Array,
+        required:false,
+        default:[]
     },
     theatre:{
         type:mongooes.Schema.Types.ObjectId,

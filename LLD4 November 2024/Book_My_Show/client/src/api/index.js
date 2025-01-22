@@ -3,8 +3,9 @@ import axios from "axios";
 export const axiosInstance=axios.create({
     headers:{
         "Content-Type":"application/json",
-        Authorization:`Barear ${localStorage.getItem('token')}`, // reading token from local storage
+        // Authorization:`Barear ${localStorage.getItem('token')}`, // reading token from local storage
         // Authorization: `Barear ${getCookie('token')}`
+        baseURL:"/"
     },
     
 });

@@ -12,13 +12,11 @@ import { addShows,
  } from '../../api/shows'   
 import moment from 'moment'
 
-
 const ShowModal=({
     isShowModalOpen,
     setIsShowModalOpen,
     selectedTheatre
 })=> {
-
     const[view, setView]=useState("table");
     const[movies, setMovies]= useState([]);
     const [selectedMovie, setSelectedMovie]=useState(null);
@@ -28,7 +26,7 @@ const ShowModal=({
     
     const getData= async()=>{
         try{
-            dispatch(ShowLoading());
+            // dispatch(ShowLoading());
             const movieResponse= await getAllMovies();
             console.log("movie response in get data", movieResponse.success)
             if(movieResponse.success){
@@ -40,20 +38,25 @@ const ShowModal=({
             }
 
             const showResponse=await getAllShowsByTheatre({
-                theatreId:selectedTheatre._id,
+                id:selectedTheatre._id
             });
             if(showResponse.success){
-                setShows(showResponse.data)
+                // setShows(showResponse.data)
+                // to render a table list of child process every row has a unique identification is required
+                setShows(showResponse.data.map(show=>({...show, key: show._id})))
             }else{
                 message.error(showResponse.message);
                 console.log("getData failed else block showresponse", showResponse.message);
             }
-            dispatch(HideLoading());
+            // dispatch(HideLoading());
         }catch(err){
             message.error(err.message)
             console.log("getData failed", err.message);
-            dispatch(HideLoading());
+            //  dispatch(HideLoading());
         }
+        // finally{
+        //     dispatch(HideLoading());
+        // }
     }
 
     const onFinish=async(values)=>{
@@ -94,7 +97,9 @@ const ShowModal=({
         const handleDelete=async(showId)=>{
             try{
                 dispatch(ShowLoading());
-                const response=await deleteShows({showId:showId});
+                console.log("delete show component", showId)
+                const response=await deleteShows({id:showId});
+                console.log("response of delet show route", response)
                 if(response.success){
                     message.success(response.message);
                     getData();
@@ -138,9 +143,11 @@ const ShowModal=({
                 dataIndex:"movie",
                 key:"movie",
                 render:(text,data)=>{
-                    return data.movie.title;
+                    console.log("show modal colums:--",data)
+                    return <strong> {data.movie?.title || 'movie not found'}</strong>;
                 }
             },
+            
             {
                 title:"Ticket price",
                 dataIndex:"ticketPrice",
@@ -197,7 +204,6 @@ const ShowModal=({
                 }
             }
         ];
-
         useEffect(()=>{
             getData();
         },[])
@@ -228,7 +234,7 @@ const ShowModal=({
             )}
         </div>
         {view==="table" && <Table dataSource={shows} columns={colums}/>}
-
+            
         {(view==="add" || view==="edit") && (
             <Form 
                 className=''
@@ -348,7 +354,7 @@ const ShowModal=({
                 <Form.Item
                     label='Total Seats'
                     htmlFor='totalSeats'
-                    name='totalseats'
+                    name='totalSeats'
                     className='d-block'
                     rules={[{required:true, message:"totalPrice required"}]}
                 >

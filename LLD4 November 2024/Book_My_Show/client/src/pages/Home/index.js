@@ -19,15 +19,15 @@ const getData= async()=>{
   try{
     dispatch(ShowLoading());
     const response= await  getAllMovies();
-    console.log("get data try block", response.data)
+    // console.log("get data try block", response.data)
 
     if(response.success){
       setMovies(response.data);
       dispatch(HideLoading());
-      console.log("get all movies data",response.data);
+      // console.log("get all movies data",response.data);
     }
     else{
-      console.log("get data else block", response,response.message)
+      // console.log("get data else block", response,response.message)
       // message.error(response.message);
       message.error(response.message)
     }
@@ -44,9 +44,8 @@ useEffect(()=>{
 // handleSearch
 const handleSearch= (e)=>{
   setSearchText(e.target.value);
-  console.log(searchText);
+  // console.log(searchText);
 }
-
 
   return (
     <>
@@ -106,7 +105,6 @@ const handleSearch= (e)=>{
           
           </Col>)
           }
-
       </Row>
     </>
   )
