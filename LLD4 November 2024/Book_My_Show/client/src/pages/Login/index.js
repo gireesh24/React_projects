@@ -60,6 +60,7 @@ function Login() {
         </Button>
     </Form.Item>
     <p>New user? <Link to="/register">Register</Link></p>
+    <p>Forgot Passowrd? <Link to="/forgot_password">forgot password</Link></p>
             </Form>
         </section>
         </main>

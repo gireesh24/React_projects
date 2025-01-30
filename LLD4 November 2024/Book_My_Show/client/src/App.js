@@ -11,6 +11,8 @@ import store from './redux/store';
 import Partner from './pages/Partner';
 import SingleMovie from './pages/Home/singleMovie';
 import BookShow from './pages/Home/BookShow';
+import ForgotPassword from './pages/User/ForgotPassword';
+import ResetPassword from './pages/User/ResetPassword';
 function App() {
   return (
     <div className="App">
@@ -47,6 +49,8 @@ function App() {
     <BookShow />
     </ProtectedRoute>
    }/>
+      <Route path="/forgot_password" element={<ForgotPassword />}/>
+      <Route path="/resetpassword/:email" element={<ResetPassword />}/>
 
 </Routes>
 </BrowserRouter>

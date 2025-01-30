@@ -5,8 +5,10 @@ import { axiosInstance } from "./";
 export const RegisterUser= async (value)=>{
     try{
         const response=await axiosInstance.post("/api/users/register", value);
+        console.log('registered user axios instance called')
         return response.data;
     }catch(err){
+        console.log('registered user axios instance failed')
         console.log(err);
     }
 }
@@ -28,5 +30,26 @@ return response.data
     }
     catch(err){
         console.log(err);
+    }
+}
+
+export const forgotPassword= async(value)=>{
+    try{
+        const response= await axiosInstance.patch("/api/users/forgotpassword", value)
+        return response.data;
+    }catch(err){
+        console(err);
+    }
+}
+
+export const resetpassword=async(value, id)=>{
+    try{
+        console.log('axios instance rest passowrd route try block')
+        const response= await axiosInstance.patch(`/api/users/resetpassword/${id}`, value)
+        return response.data;
+    }catch(err){
+        console.log('axios instance rest passowrd catch try block')
+        console(err);
+        
     }
 }

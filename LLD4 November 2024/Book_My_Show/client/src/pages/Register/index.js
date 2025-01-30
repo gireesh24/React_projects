@@ -2,8 +2,9 @@ import React from 'react';
 import { Form,Button,Input, message, Radio } from 'antd';
 import { Link } from 'react-router-dom';
 import { RegisterUser } from '../../api/users';
-
+import { useNavigate } from 'react-router-dom';
 function Register() {
+    const navigate=useNavigate();
 
 const onfinsh= async (values) =>{
     try{
@@ -11,6 +12,7 @@ const response= await RegisterUser(values);
 if(response.success){
     // success
     message.success(response.message)
+    navigate('/login')
 }
 else{
     message.success(response.message)

@@ -5,7 +5,8 @@ const express= require("express")
 const cookie=require("cookie-parser")
 const users=require("../models/userModel");
 // const { now } = require("mongoose");
-const authMiddleware=require("../middlewares/authmiddlewares")
+const authMiddleware=require("../middlewares/authmiddlewares");
+const EmailHelper = require("../utils/emailHelper");
 const userRouter=express.Router();
 
 
@@ -113,6 +114,90 @@ userRouter.get("/allusers", async (req,res)=>{
         console.log("get all users router failes")
         res.send(500).json({
             message:"get all users route failed"
+        })
+    }
+})
+
+userRouter.patch("/forgotpassword", async(req,res)=>{
+    const otpGenrater= function(){
+        return Math.floor(100000+Math.random()*900000)
+    }
+    try{
+        if(req.body.email== undefined){
+           return  res.status(401).send({
+                success:false,
+                message:"email required"
+             })
+        }
+        let user=await users.findOne({email:req.body.email})
+        if(user===null){
+            return res.status(404).send({
+                success:false,
+                message:"user not found"
+             })
+        }
+        const otp=otpGenrater();
+        // console.log("otp generater",otp)
+        const expary=Date.now()+10*60*1000;
+        user.otp=otp;
+        user.otpExpary=expary;
+        await user.save();
+        await EmailHelper("otp.html",user.email,{
+        name:user.email,
+        otp:user.otp
+            });
+
+
+            // console.log("forgot password route",user.email,user.otp)
+            res.status(200).send({
+            success:true,
+            message:"otp send successfully"
+         })
+
+}catch(err){
+        // console.log("fogot password route catch block",err)
+        res.status(500).json({
+            message:err.message       
+        })
+    }
+})
+
+
+userRouter.patch("/resetpassword/:email", async(req,res)=>{
+    try{
+        let resetDetails=req.body;
+        if(!resetDetails.password || !resetDetails.otp){
+            return res.status(401).json({
+                status:"failure",
+                message:"invalid request"
+            })
+        }
+        const user=await users.findOne({email:req.params.email});
+        if(user==null){
+            return res.status(401).json({
+                status:"failure",
+                message:"user not found"
+            })
+        }
+        if(Date.now()>user.otpExpary){
+            return res.status(401).json({
+                status:"failure",
+                message:"otp experied"
+            })
+        }
+        user.password=resetDetails.password;
+        user.otp=undefined;
+        user.otpExpary=undefined;
+        await user.save();
+
+        res.status(200).json({
+            status:"success",
+            message:"password reseted successfully"
+        })
+    }catch(err){
+        console.log("reset password route catch block")
+        res.status(500).json({
+            message:err.message,          
         })
     }
 })

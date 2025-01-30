@@ -9,6 +9,12 @@ const userSchema= new mongooes.Schema({
         enum:["user","admin","partner"],
         required:true,
         default:"user"
+    },
+    otp:{
+        type: String
+    },
+    otpExpary:{
+        type:Date
     }
 })
 
